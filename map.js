@@ -1,5 +1,5 @@
-require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home", "esri/widgets/LayerList"],
-    function (esriConfig, WebMap, MapView, Home, LayerList) {
+require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home", "esri/widgets/LayerList", "esri/widgets/BasemapGallery"],
+    function (esriConfig, WebMap, MapView, Home, LayerList, BasemapGallery) {
 
         esriConfig.apiKey = "AAPKfd648ea562964d168e3c24aa60b09114rjgbhvYT_hHEyS4z8w28nr2qpHAhQJOvUlgnWq0OT2MfajtPyBuiG0k0Hslv4x5a";
 
@@ -22,15 +22,42 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
 
         const layerList = new LayerList({
             view
-        })
+        });
 
         view.ui.add("layer-list-btn", "top-right");
         view.ui.add(layerList, "top-right");
+        view.ui.add("basemap-gallery-btn", "top-right")
+
+        const basemapGallery = new BasemapGallery({
+            view
+        });
+
+        view.ui.add(basemapGallery, "top-right");
         
         document.getElementById("layer-list-btn").addEventListener("click", function(){
+            toggleButton();
+
+        });
+
+        document.getElementById("basemap-gallery-btn").addEventListener("click", function(){
+            toggleButton();
+        });
+
+        function toggleButton(){
             const layerListEl = document.getElementsByClassName("esri-layer-list")[0];
             const currentProp = layerListEl.style.getPropertyValue("display");
 
             layerListEl.style.setProperty("display", currentProp == "none"? "block" : "none");
-        })
+
+            const galleryEl = document.getElementsByClassName("esri-basemap-gallery")[0];
+            currentPropGallery = galleryEl.style.getPropertyValue("display");
+            galleryEl.style.setProperty("display", currentPropGallery == "none"? "block" : "none");
+        }
+
+
+
+
+
+
+
     })
