@@ -35,29 +35,24 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
         view.ui.add(basemapGallery, "top-right");
         
         document.getElementById("layer-list-btn").addEventListener("click", function(){
-            toggleButton();
+            toggleButton("layerList");
 
         });
 
         document.getElementById("basemap-gallery-btn").addEventListener("click", function(){
-            toggleButton();
+            toggleButton("gallery");
         });
 
-        function toggleButton(){
-            const layerListEl = document.getElementsByClassName("esri-layer-list")[0];
-            const currentProp = layerListEl.style.getPropertyValue("display");
+        function toggleButton(element){
+            if(element == "layerList") {
+                const layerListEl = document.getElementsByClassName("esri-layer-list")[0];
+                const currentProp = layerListEl.style.getPropertyValue("display");
+                layerListEl.style.setProperty("display", currentProp == "none"? "block" : "none");
+            } else if(element == "gallery"){
+                const galleryEl = document.getElementsByClassName("esri-basemap-gallery")[0];
+                currentPropGallery = galleryEl.style.getPropertyValue("display");
+                galleryEl.style.setProperty("display", currentPropGallery == "none"? "block" : "none");
+            }
 
-            layerListEl.style.setProperty("display", currentProp == "none"? "block" : "none");
-
-            const galleryEl = document.getElementsByClassName("esri-basemap-gallery")[0];
-            currentPropGallery = galleryEl.style.getPropertyValue("display");
-            galleryEl.style.setProperty("display", currentPropGallery == "none"? "block" : "none");
         }
-
-
-
-
-
-
-
-    })
+ });
