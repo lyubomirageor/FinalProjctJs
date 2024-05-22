@@ -1,5 +1,5 @@
-require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home", "esri/widgets/LayerList", "esri/widgets/BasemapGallery", "esri/widgets/Directions", "esri/layers/RouteLayer"],
-    function (esriConfig, WebMap, MapView, Home, LayerList, BasemapGallery, Directions, RouteLayer) {
+require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home", "esri/widgets/LayerList", "esri/widgets/BasemapGallery", "esri/widgets/Directions", "esri/layers/RouteLayer", "esri/widgets/Search"],
+    function (esriConfig, WebMap, MapView, Home, LayerList, BasemapGallery, Directions, RouteLayer, Search) {
 
         esriConfig.apiKey = "AAPKfd648ea562964d168e3c24aa60b09114rjgbhvYT_hHEyS4z8w28nr2qpHAhQJOvUlgnWq0OT2MfajtPyBuiG0k0Hslv4x5a";
 
@@ -17,6 +17,7 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
             map: webmap
         });
 
+
         const directionswidget = new Directions({
             layer: routeLayer,
             apiKey: esriConfig.apiKey,
@@ -31,6 +32,12 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
 
         view.ui.add(homeBtn, "top-left");
 
+        const searchWidget = new Search({
+            view
+        });
+
+        view.ui.add(searchWidget, "top-left")
+
         const layerList = new LayerList({
             view
         });
@@ -39,6 +46,7 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
         view.ui.add(layerList, "top-right");
         view.ui.add("basemap-gallery-btn", "top-right")
         view.ui.add("directions-btn","bottom-left" )
+        view.ui.add("search-btn", "top-left")
 
 
         const basemapGallery = new BasemapGallery({
@@ -60,6 +68,10 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
             toggleButton("directionswidget")
         })
 
+        document.getElementById("search-btn").addEventListener("click", function(){
+            toggleButton("searchWidget")
+        })
+
         function toggleButton(element){
             if(element == "layerList") {
                 const layerListEl = document.getElementsByClassName("esri-layer-list")[0];
@@ -73,6 +85,10 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
                 const directionEl = document.getElementsByClassName("esri-directions")[0];
                 currentPropDirections = directionEl.style.getPropertyValue("display");
                 directionEl.style.setProperty("display", currentPropDirections == "none"? "block" : "none");
+            } else if(element == "searchWidget"){
+                const searchEl = document.getElementsByClassName("esri-search")[0];
+                currentPropSearch = searchEl.style.getPropertyValue("display");
+                searchEl.style.setProperty("display", currentPropSearch == "none"? "block" : "none");
             }
 
         }
