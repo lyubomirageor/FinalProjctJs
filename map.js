@@ -38,6 +38,8 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
         view.ui.add("layer-list-btn", "top-right");
         view.ui.add(layerList, "top-right");
         view.ui.add("basemap-gallery-btn", "top-right")
+        view.ui.add("directions-btn","bottom-left" )
+
 
         const basemapGallery = new BasemapGallery({
             view
@@ -54,6 +56,10 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
             toggleButton("gallery");
         });
 
+        document.getElementById("directions-btn").addEventListener("click", function(){
+            toggleButton("directionswidget")
+        })
+
         function toggleButton(element){
             if(element == "layerList") {
                 const layerListEl = document.getElementsByClassName("esri-layer-list")[0];
@@ -63,6 +69,10 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
                 const galleryEl = document.getElementsByClassName("esri-basemap-gallery")[0];
                 currentPropGallery = galleryEl.style.getPropertyValue("display");
                 galleryEl.style.setProperty("display", currentPropGallery == "none"? "block" : "none");
+            }  else if(element == "directionswidget"){
+                const directionEl = document.getElementsByClassName("esri-directions")[0];
+                currentPropDirections = directionEl.style.getPropertyValue("display");
+                directionEl.style.setProperty("display", currentPropDirections == "none"? "block" : "none");
             }
 
         }
