@@ -35,7 +35,7 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
         const searchWidget = new Search({
             view
         });
-
+        view.ui.add("search-btn", "top-left")
         view.ui.add(searchWidget, "top-left")
 
         const layerList = new LayerList({
@@ -52,7 +52,7 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
         view.ui.add(layerList, "top-right");
         view.ui.add("basemap-gallery-btn", "top-right")
         view.ui.add("directions-btn","bottom-left" )
-        view.ui.add("search-btn", "top-left")
+
 
 
         const basemapGallery = new BasemapGallery({
