@@ -1,5 +1,5 @@
-require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home", "esri/widgets/LayerList", "esri/widgets/BasemapGallery", "esri/widgets/Directions", "esri/layers/RouteLayer", "esri/widgets/Search"],
-    function (esriConfig, WebMap, MapView, Home, LayerList, BasemapGallery, Directions, RouteLayer, Search) {
+require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home", "esri/widgets/LayerList", "esri/widgets/BasemapGallery", "esri/widgets/Directions", "esri/layers/RouteLayer", "esri/widgets/Search", "esri/widgets/ScaleBar"],
+    function (esriConfig, WebMap, MapView, Home, LayerList, BasemapGallery, Directions, RouteLayer, Search, ScaleBar) {
 
         esriConfig.apiKey = "AAPKfd648ea562964d168e3c24aa60b09114rjgbhvYT_hHEyS4z8w28nr2qpHAhQJOvUlgnWq0OT2MfajtPyBuiG0k0Hslv4x5a";
 
@@ -41,6 +41,12 @@ require(["esri/config", "esri/WebMap", "esri/views/MapView", "esri/widgets/Home"
         const layerList = new LayerList({
             view
         });
+
+        const scaleBar = new ScaleBar({
+            view
+        });
+
+        view.ui.add(scaleBar, "bottom-right")
 
         view.ui.add("layer-list-btn", "top-right");
         view.ui.add(layerList, "top-right");
